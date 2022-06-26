@@ -1,6 +1,6 @@
 import React from "react";
-import { Text } from "react-native";
-import { Card, Paragraph, Title } from "react-native-paper";
+import styled from "styled-components/native";
+import { Card, Title } from "react-native-paper";
 
 interface IResaurantData {
     name: string;
@@ -15,7 +15,11 @@ interface IRestaurantInfoProps {
     restaurant?: IResaurantData;
 }
 
-export const RestaurantInfo: React.FC<IRestaurantInfoProps> = ({
+const RestaurantCard = styled(Card)`
+    padding: 16px;
+`;
+
+export const RestaurantInfoCard: React.FC<IRestaurantInfoProps> = ({
     restaurant = {},
 }) => {
     const {
@@ -30,13 +34,10 @@ export const RestaurantInfo: React.FC<IRestaurantInfoProps> = ({
         isClosedTemporarily,
     } = restaurant;
     return (
-        <Card style={{ padding: 16 }}>
+        <RestaurantCard>
             <Card.Cover source={{ uri: photos[0] }} />
 
-            <Card.Content>
-                <Title>{name}</Title>
-                <Paragraph>{address}</Paragraph>
-            </Card.Content>
-        </Card>
+            <Title>{name}</Title>
+        </RestaurantCard>
     );
 };

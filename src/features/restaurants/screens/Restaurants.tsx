@@ -1,25 +1,38 @@
 import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { useState } from "react";
-import { RestaurantInfo } from "../components/RestaurantInfo";
+import styled from "styled-components/native";
+import { RestaurantInfoCard } from "../components/RestaurantInfoCard";
+
+const SafeArea = styled.SafeAreaView`
+    flex: 1;
+    ${StatusBar.currentHeight && `padding-top: ${StatusBar.currentHeight}`}px;
+`;
+const SearchBarContainer = styled.View`
+    padding: 16px;
+`;
+const RestaurantsListContainer = styled.View`
+    flex: 1;
+    padding: 16px;
+`;
 
 export const RestaurantsScreen = () => {
     const [searhedValue, setSearchedValue] = useState("");
 
     return (
-        <SafeAreaView style={styles.appContainer}>
-            <View style={styles.searchBarContainer}>
+        <SafeArea>
+            <SearchBarContainer>
                 <Searchbar
                     placeholder="Search"
                     value={searhedValue}
                     onChangeText={setSearchedValue}
                 />
-            </View>
+            </SearchBarContainer>
 
-            <View style={styles.restaurantsList}>
-                <RestaurantInfo />
-            </View>
-        </SafeAreaView>
+            <RestaurantsListContainer>
+                <RestaurantInfoCard />
+            </RestaurantsListContainer>
+        </SafeArea>
     );
 };
 
@@ -28,9 +41,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight,
     },
-    searchBarContainer: {
-        padding: 16,
-    },
+
     restaurantsList: {
         flex: 1,
         padding: 16,
